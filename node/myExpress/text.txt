@@ -1,0 +1,2 @@
+logui cal negocio=== crud
+gateways hace uso para que funcione pero no es necesario
