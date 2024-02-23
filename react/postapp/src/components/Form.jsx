@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import ButtonElm from "../components/elements/buttonElm";
+import ButtonElm from "./elements/ButtonElm";
 import { postUser } from "../api/useApi";
 
 export default function Form({ sendHandler }) {
@@ -17,38 +17,42 @@ export default function Form({ sendHandler }) {
 
   return (
     <>
-      <div className="w-full max-w-lg bg-neutral-800 rounded-md p-10 m-2">
-        <h1 className="text-3xl">Form card</h1> <br />
-        <form
-          onSubmit={onSubmit}
-          className="grid grid-cols-3 gap-3 place-items-center">
-          <label>name</label>
-          <input
-            className=" bg-zinc-700 rounded-md text-white px-4 py-2 mx-3 col-span-2 "
-            type="text"
-            placeholder="name"
-            {...register("name", { required: true })}
-          />
+      <form
+        onSubmit={onSubmit}
+        className="grid grid-cols-4 gap-5 place-items-center w-3/6 bg-neutral-800 rounded-lg p-10 m-2 text-lg">
+        <label>Title</label>
+        <input
+          className="w-full bg-zinc-700 rounded-md text-white px-4 py-2 mx-3 col-span-3 "
+          type="text"
+          placeholder="title"
+          {...register("title", { required: true })}
+        />
 
-          <label>lastname</label>
-          <input
-            className=" bg-zinc-700 rounded-md text-white px-4 py-2 mx-3 col-span-2 "
-            type="text"
-            placeholder="lastname"
-            {...register("lastname", { required: true })}
-          />
+        <label>Description</label>
+        <textarea
+          className="w-full bg-zinc-700 rounded-md text-white px-4 py-2 mx-3 col-span-3 "
+          type="text"
+          rows={8}
+          placeholder="description"
+          {...register("description", { required: true })}
+        />
 
-          <label>imagen</label>
-          <input
-            className=" bg-zinc-700 rounded-md text-white px-4 py-2 mx-3 col-span-2 "
-            type="text"
-            placeholder="https://picsum.photos/id/237/200/300"
-            {...register("image", { required: true })}
-          />
+        <label>Image</label>
+        <input
+          className="w-full bg-zinc-700 rounded-md text-white px-4 py-2 mx-3 col-span-3"
+          type="text"
+          placeholder="https://picsum.photos/id/237/200/300"
+          {...register("image", { required: true })}
+        />
+        <p className="text-xs text-slate-400">
+          https://picsum.photos/id/237/200/300
+        </p>
+        <br />
 
-          <ButtonElm variant="save"> Send </ButtonElm>
-        </form>
-      </div>
+        <ButtonElm variant="save" className="col-span-4">
+          Send
+        </ButtonElm>
+      </form>
     </>
   );
 }
