@@ -22,20 +22,20 @@ function App() {
     skills: "html/css/js",
   };
 
-  useEffect(() => {
-    async function loadJobs(data) {
-      const response = await postJob(data);
-      console.log(response)
-      setJobs(response);
-      // navigate("/")
-    }
-  }, []);
-console.log(jobs)
+  const sendJob = handleSubmit (async (data) => {
+    const response = await postJob(data);
+    console.log(response);
+    setJobs(response);
+  });
+
+  console.log(jobs);
 
   return (
     <>
       <div className="bg-gray-800 p-4 rounde ">
-        <form className="w-full flex flex-col text-lg justify-center gap-4">
+        <form
+          onSubmit={sendJob}
+          className="w-full flex flex-col text-lg justify-center gap-4">
           <label htmlFor="">titulo </label>
           <input
             className="p-1"
