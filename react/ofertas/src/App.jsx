@@ -2,37 +2,33 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 import { useForm } from "react-hook-form";
 import { Job } from "./components/Job";
-import { postJob } from "./api/jobsApi";
+import { postJob, getJobs } from "./api/jobsApi";
 import { useNavigate } from "react-router-dom";
 
 function App() {
   // const navigate = useNavigate();
-  const [jobs, setJobs] = useState({});
+  const [jobs, setJobs] = useState([]);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const job = {
-    title: "Remote Senior Full Stack React Developer",
-    description:
-      "4+ years of software development experience\n2+ years of experience with React.js",
-    salary: "100k/yr",
-    skills: "html/css/js",
-  };
-
-  const sendJob = handleSubmit (async (data) => {
+  const sendJob = handleSubmit(async (data) => {
     const response = await postJob(data);
-    console.log(response);
+    console.log(response, "respons");
     setJobs(response);
   });
 
-  console.log(jobs);
+  useEffect(() => {
+    const response = getJobs();
+    response.then((jobs) => setJobs(jobs));
+  }, []);
 
+  console.log(jobs, "jobs");
   return (
     <>
-      <div className="bg-gray-800 p-4 rounde ">
+      <div className="bg-gray-800 p-4 rounde w-96">
         <form
           onSubmit={sendJob}
           className="w-full flex flex-col text-lg justify-center gap-4">
@@ -72,7 +68,8 @@ function App() {
           <button className="px-2 py-1 bg-violet-800">Send</button>
         </form>
       </div>
-      <Job jobInfo={job}></Job>
+      {/* {jobs.map((jobInfo, index)=> <Job key={index} jobInfo={jobInfo}/>)} */}
+      {/* <Job jobInfo={job}></Job> */}
     </>
   );
 }
